@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+# Perform necessary redmine removal steps
+# after package is uninstalled.
+#
+
+echo "redmine has been uninstalled!"
+
+exit 0
