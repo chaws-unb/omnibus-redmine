@@ -5,8 +5,8 @@
 #
 
 name "redmine"
-maintainer "CHANGE ME"
-homepage "https://CHANGE-ME.com"
+maintainer "Redmine.org"
+homepage "http://www.redmine.org/"
 
 # Defaults to C:/redmine on Windows
 # and /opt/redmine on all other platforms
@@ -15,11 +15,14 @@ install_dir "#{default_root}/#{name}"
 build_version Omnibus::BuildVersion.semver
 build_iteration 1
 
+override :ruby, version: '2.1.1'
+override :rubygems, version: '2.2.1'
+
 # Creates required build directories
 dependency "preparation"
 
-# redmine dependencies/components
-# dependency "somedep"
+
+dependency "redmine-src"
 
 # Version manifest file
 dependency "version-manifest"
