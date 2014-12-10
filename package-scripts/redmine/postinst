@@ -13,7 +13,10 @@ function error_exit
 }
 
 # Create needded dir for postgres
-mkdir -p /opt/redmine/embedded/data/pg_tblspc /opt/redmine/embedded/data/pg_twophase
+mkdir -p /opt/redmine/embedded/data/pg_tblspc 
+mkdir -p /opt/redmine/embedded/data/pg_twophase 
+mkdir -p /opt/redmine/embedded/data/pg_stat_tmp
+touch  /opt/redmine/embedded/data/pg_stat_tmp/pgstat.tmp
 
 # Change to user permission
 chown $USER:$USER /opt/redmine -R
