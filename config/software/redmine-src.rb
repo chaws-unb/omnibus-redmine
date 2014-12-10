@@ -26,5 +26,5 @@ dependency "bundler"
 #source :git => "https://github.com/chaws-unb/redmine.git"
 
 build do
-  
+  command "touch lala.txt"
 end
