@@ -26,10 +26,10 @@ echo "chown $redmine_user:$redmine_user /opt/redmine -R"
 chown $redmine_user:$redmine_user /opt/redmine -R
 
 # Start the database
-/opt/redmine/embedded/bin/postgres -D /opt/redmine/embedded/data -p 5433 &
+sudo -u $redmine_user /opt/redmine/embedded/bin/postgres -D /opt/redmine/embedded/data -p 5433 &
 
 # Start the application
-/opt/redmine/embedded/bin/ruby /opt/redmine/embedded/service/redmine/bin/rails server webrick -e production &
+sudo -u $redmine_user /opt/redmine/embedded/bin/ruby /opt/redmine/embedded/service/redmine/bin/rails server webrick -e production &
 
 echo "Thank you for installing redmine!"
 
