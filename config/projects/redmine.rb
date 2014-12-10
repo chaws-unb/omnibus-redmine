@@ -21,7 +21,7 @@ override :rubygems, version: '2.2.1'
 # Creates required build directories
 dependency "preparation"
 
-
+# Includes redmine descriptor
 dependency "redmine-src"
 
 # Version manifest file

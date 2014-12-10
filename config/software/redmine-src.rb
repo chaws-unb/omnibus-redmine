@@ -33,8 +33,18 @@ env = {
 }
 
 build do
-  command "touch lala.txt"
+  # Create redmine user
+  command "sudo useradd redmine"
 
+  # Create necessary directories
+  command "sudo -u redmine mkdir -p #{install_dir}/embedded/data"
+
+  # Create the database
+  command "sudo -u redmine #{install_dir}/embedded/bin/initdb -D #{install_dir}/embedded/data -U postgres"
+
+  # Create 
+
+  # Install all the gems
   bundle_without = %w{development test rmagick}
   bundle "install --without #{bundle_without.join(" ")} --path=#{install_dir}/embedded/service/gem", :env => env
 end
