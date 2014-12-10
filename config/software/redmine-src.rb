@@ -62,6 +62,7 @@ production:
   adapter: postgresql
   database: redmine
   host: localhost
+  port: 5433
   username: redmine
   password: "redmine"
        EOH
@@ -77,5 +78,8 @@ production:
 
   # Migrate
   bundle "exec rake db:migrate", :env => r_env
+
+  # Insert default data
+  bundle "exec rake redmine:load_default_data", :env => r_env
 
 end
