@@ -32,6 +32,10 @@ env = {
   "LD_RUN_PATH" => "#{install_dir}/embedded/lib",
 }
 
+r_env = {
+  "RAILS_ENV" => "production",
+}
+
 build do
 
   # Create necessary directories
@@ -69,5 +73,9 @@ production:
   bundle "install --without #{bundle_without.join(" ")} --path=#{install_dir}/embedded/service/gem", :env => env
 
   # Generate token
-  rake "generate_secret_token"
+  bundle "exec rake generate_secret_token"
+
+  # Migrate
+  bundle "exec rake db:migrate", :env => r_env
+
 end
