@@ -17,7 +17,7 @@
 #
 
 name "redmine-src"
-default_version "master"
+default_version "chaws"
 
 dependency "ruby"
 dependency "rubygems"
