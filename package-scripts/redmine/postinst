@@ -12,7 +12,17 @@ function error_exit
   exit 1
 }
 
-/opt/redmine/embedded/bin/ruby /opt/redmine/embedded/service/redmine/script/rails server webrick -e production
+# Create needded dir for postgres
+mkdir -p /opt/redmine/embedded/data/pg_tblspc /opt/redmine/embedded/data/pg_twophase
+
+# Change to user permission
+chown $USER:$USER /opt/redmine -R
+
+# Start the database
+/opt/redmine/embedded/bin/postgres -D /opt/redmine/embedded/data -p 5433 &
+
+# Start the application
+/opt/redmine/embedded/bin/ruby /opt/redmine/embedded/service/redmine/bin/rails server webrick -e production &
 
 echo "Thank you for installing redmine!"
 
