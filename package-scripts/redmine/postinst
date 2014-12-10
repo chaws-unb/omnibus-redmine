@@ -12,7 +12,7 @@ function error_exit
   exit 1
 }
 
-/opt/redmine/embedded/ruby /opt/redmine/embedded/service/redmine/script/rails server webrick -e production
+/opt/redmine/embedded/bin/ruby /opt/redmine/embedded/service/redmine/script/rails server webrick -e production
 
 echo "Thank you for installing redmine!"
 
