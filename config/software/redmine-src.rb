@@ -22,6 +22,7 @@ default_version "master"
 dependency "ruby"
 dependency "rubygems"
 dependency "bundler"
+dependency "rsync"
 dependency "postgresql"
 
 source :git => "https://github.com/chaws-unb/redmine.git"
@@ -86,5 +87,8 @@ production:
   # Create static directory files
   command "mkdir -p tmp tmp/pdf public/plugin_assets"
   command "chmod -R 755 files log tmp public/plugin_assets"
+
+  command "mkdir -p #{install_dir}/embedded/service/redmine"
+  command "#{install_dir}/embedded/bin/rsync -a --delete --exclude=.git/*** --exclude=.gitignore ./ #{install_dir}/embedded/service/redmine/"
 
 end
