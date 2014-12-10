@@ -41,7 +41,7 @@ build do
   command "#{install_dir}/embedded/bin/initdb -D #{install_dir}/embedded/data -U postgres"
 
   # Initiate the database
-  command "#{install_dir}/embedded/bin/postgres -D #{install_dir}/embedded/data -p 5433"
+  command "#{install_dir}/embedded/bin/postgres -D #{install_dir}/embedded/data -p 5433 &"
 
   # Create redmine role and database
   command "#{install_dir}/embedded/bin/psql -U postgres -p 5433 -c \"CREATE ROLE redmine LOGIN ENCRYPTED PASSWORD 'redmine' NOINHERIT VALID UNTIL 'infinity';\""
@@ -64,4 +64,7 @@ production:
   # Install all the gems
   bundle_without = %w{development test rmagick}
   bundle "install --without #{bundle_without.join(" ")} --path=#{install_dir}/embedded/service/gem", :env => env
+
+  # Generate token
+  rake "generate_secret_token"
 end
