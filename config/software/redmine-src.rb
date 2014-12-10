@@ -22,9 +22,19 @@ default_version "master"
 dependency "ruby"
 dependency "rubygems"
 dependency "bundler"
+dependency "postgresql"
 
-#source :git => "https://github.com/chaws-unb/redmine.git"
+source :git => "https://github.com/chaws-unb/redmine.git"
+
+env = {
+  "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
+  "CFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
+  "LD_RUN_PATH" => "#{install_dir}/embedded/lib",
+}
 
 build do
   command "touch lala.txt"
+
+  bundle_without = %w{development test rmagick}
+  bundle "install --without #{bundle_without.join(" ")} --path=#{install_dir}/embedded/service/gem", :env => env
 end
