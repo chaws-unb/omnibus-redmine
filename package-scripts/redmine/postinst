@@ -25,6 +25,9 @@ read redmine_user
 echo "chown $redmine_user:$redmine_user /opt/redmine -R"
 chown $redmine_user:$redmine_user /opt/redmine -R
 
+# Give right permissions
+chmod 700 /opt/redmine/embedded/data
+
 # Start the database
 sudo -u $redmine_user /opt/redmine/embedded/bin/postgres -D /opt/redmine/embedded/data -p 5433 &
 

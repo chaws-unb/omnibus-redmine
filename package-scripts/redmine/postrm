@@ -6,4 +6,6 @@
 
 echo "redmine has been uninstalled!"
 
+rm -rf /opt/redmine/
+
 exit 0
