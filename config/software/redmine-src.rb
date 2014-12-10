@@ -43,6 +43,9 @@ build do
   # Initiate the database
   command "#{install_dir}/embedded/bin/postgres -D #{install_dir}/embedded/data -p 5433 &"
 
+  # Waits until service starts
+  command "sleep 3"
+
   # Create redmine role and database
   command "#{install_dir}/embedded/bin/psql -U postgres -p 5433 -c \"CREATE ROLE redmine LOGIN ENCRYPTED PASSWORD 'redmine' NOINHERIT VALID UNTIL 'infinity';\""
   command "#{install_dir}/embedded/bin/psql -U postgres -p 5433 -c \"CREATE DATABASE redmine OWNER=redmine;\""
