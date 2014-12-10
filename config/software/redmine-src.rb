@@ -17,13 +17,13 @@
 #
 
 name "redmine-src"
-default_version "master" # 7.0.0
+default_version "master"
 
 dependency "ruby"
 dependency "rubygems"
 dependency "bundler"
 
-source :git => "https://github.com/chaws-unb/redmine.git"
+#source :git => "https://github.com/chaws-unb/redmine.git"
 
 build do
   
