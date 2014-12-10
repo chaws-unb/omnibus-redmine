@@ -34,6 +34,7 @@ env = {
 
 r_env = {
   "RAILS_ENV" => "production",
+  "REDMINE_LANG" => "en",
 }
 
 build do
@@ -81,5 +82,9 @@ production:
 
   # Insert default data
   bundle "exec rake redmine:load_default_data", :env => r_env
+
+  # Create static directory files
+  command "mkdir -p tmp tmp/pdf public/plugin_assets"
+  command "chmod -R 755 files log tmp public/plugin_assets"
 
 end
