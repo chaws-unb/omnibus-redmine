@@ -22,6 +22,7 @@ echo "Type username that owes this redmine instance: "
 read user
 
 # Change to user permission
+echo "chown $user:$user /opt/redmine -R"
 chown $user:$user /opt/redmine -R
 
 # Start the database
