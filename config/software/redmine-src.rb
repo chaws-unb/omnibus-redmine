@@ -33,16 +33,33 @@ env = {
 }
 
 build do
-  # Create redmine user
-  command "sudo useradd redmine"
 
   # Create necessary directories
-  command "sudo -u redmine mkdir -p #{install_dir}/embedded/data"
+  command "mkdir -p #{install_dir}/embedded/data"
 
   # Create the database
-  command "sudo -u redmine #{install_dir}/embedded/bin/initdb -D #{install_dir}/embedded/data -U postgres"
+  command "#{install_dir}/embedded/bin/initdb -D #{install_dir}/embedded/data -U postgres"
 
-  # Create 
+  # Initiate the database
+  command "#{install_dir}/embedded/bin/postgres -D #{install_dir}/embedded/data -p 5433"
+
+  # Create redmine role and database
+  command "#{install_dir}/embedded/bin/psql -U postgres -p 5433 -c \"CREATE ROLE redmine LOGIN ENCRYPTED PASSWORD 'redmine' NOINHERIT VALID UNTIL 'infinity';\""
+  command "#{install_dir}/embedded/bin/psql -U postgres -p 5433 -c \"CREATE DATABASE redmine OWNER=redmine;\""
+
+  # Copying database configuration file
+  block do
+    open("config/database.yml", "w") do |file|
+      file.print <<-EOH
+production:
+  adapter: postgresql
+  database: redmine
+  host: localhost
+  username: redmine
+  password: "redmine"
+       EOH
+    end
+  end
 
   # Install all the gems
   bundle_without = %w{development test rmagick}
