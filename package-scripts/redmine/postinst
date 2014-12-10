@@ -18,8 +18,11 @@ mkdir -p /opt/redmine/embedded/data/pg_twophase
 mkdir -p /opt/redmine/embedded/data/pg_stat_tmp
 touch  /opt/redmine/embedded/data/pg_stat_tmp/pgstat.tmp
 
+echo "Type username that owes this redmine instance: "
+read user
+
 # Change to user permission
-chown $USER:$USER /opt/redmine -R
+chown $user:$user /opt/redmine -R
 
 # Start the database
 /opt/redmine/embedded/bin/postgres -D /opt/redmine/embedded/data -p 5433 &
